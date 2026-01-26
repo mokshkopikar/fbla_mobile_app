@@ -1,0 +1,234 @@
+Mobile Application Development  Presentation  Rating Sheet  
+Expectation Item  Not Demonstrated  Below 
+Expectations  Meets Expectations  Exceeds 
+Expectations  Points 
+Earned  
+Design and Code Quality  
+Planning Process  No explanation or 
+description of the 
+planning process  Explains the process 
+but does not share 
+tangible planning 
+documents Explains the process 
+and shares tangible 
+planning documents  Explains process using 
+industry terminology 
+and displays tangible 
+planning documents   
+0 points  1-6 points  7-8 points  9-10 points  
+Appropriate use of 
+classes, modules, and/or 
+components  No use of classes, 
+modules,  or 
+components  Use of classes, 
+modules, and/or 
+components  Appropriate use of 
+classes, modules, 
+and/or components  Expert use of classes, 
+modules, and/or 
+components   
+0 points  1-2 points  3-4 points  5 points  
+Appropriate use of mobile 
+app architectural patterns  No use of 
+architectural 
+patterns Unclear use of 
+architectural 
+patterns Appropriate use of 
+architectural patterns  Expert use of 
+architectural patterns   
+0 points  1-2 points  3-4 points  5 points  
+Innovation and Creativity  No innovation or 
+creativity is 
+demonstrated  Very little innovation 
+or creativity is 
+demonstrated  App is innovative or 
+creative App is innovative and 
+creative  
+0 points  1-2 points  3-4 points  5 points  
+User Experience  
+UX Design:  
+User Journey, Design 
+Rationale, Accessibility 
+Features  No UX design 
+presented  Some elements of 
+UX design are 
+presented  UX design presented, 
+with details missing  UX design presented, 
+with details about the 
+design rationale, user 
+journey, and 
+accessibility features 
+highlighted  
+0 points  1-2 points  3-4 points  5 points  
+User interface is intuitive 
+or clear instructions are 
+provided  No instructions 
+provided and is not 
+intuitive  Instructions 
+provided  or app is 
+not intuitive  Appropriate & clear 
+instructions are 
+provided  App is intuitive and 
+clear instructions are 
+provided   
+0 points  1-2 points  3-4 points  5 points  
+Icons/graphical elements 
+are appropriate and 
+consistent  App does not have a 
+custom icon or 
+graphics App has a basic 
+custom icon and 
+graphics App has an icon that 
+tells something about 
+the app  App has an icon that 
+tells something about 
+the app and is 
+integrated into app 
+graphics  
+0 points  1-2 points  3-4 points  5 points  
+User input is validated  User input isn’t 
+validated  User input is 
+somewhat validated  User input is validated  Input validation applied 
+on both syntactical and 
+semantic levels   
+0 points  1-2 points  3-4 points  5 points  
+Application Functionality  
+Program addresses all 
+parts of the prompt  Application does not 
+address the 
+topic/problem Application 
+addresses the 
+topic/problem at a 
+minimal level  Application fully 
+addresses the 
+topic/problem Application fully 
+addresses the 
+topic/problem, and the 
+correlation is explained 
+in the instructions   
+0 points  1-6 points  7-8 points  9-10 points  
+Integrated with social 
+media  Social media is not 
+incorporated  One social media 
+platform is 
+incorporated  Two or more social 
+media platforms are 
+incorporated  App is integrated to 
+work directly with at 
+least one social media 
+application  
+0 points  1-2 points  3-4 points  5 points  
+
+2025-2026 Competitive Events Guidelines  
+Mobile Application Development  
+Mobile Application Development  - Page 8 of 8 – Updated  August 202 5 
+Expectation Item  Not Demonstrated  Below 
+Expectations  Meets Expectations  Exceeds 
+Expectations  Points 
+Earned  
+Data Handling and Storage  No consideration of 
+data handling and 
+storage practices  Minimal 
+consideration of 
+data handling and 
+storage practices 
+with basic 
+implementation  Adequate data 
+handling and storage 
+practices implemented 
+with attention to data 
+integrity and security Comprehensive and 
+secure data handling 
+and storage practices 
+implemented, ensuring 
+data integrity, 
+accessibility, and 
+protection  
+0 points  1-2 points  3-4 points  5 points  
+Documentation and 
+copyright compliance  Sources are not cited  Sources/References 
+are seldom cited to 
+support statements  Professionally 
+legitimate sources & 
+resources that support 
+statements are 
+generally present  Compelling evidence 
+from professionally 
+legitimate sources & 
+resources is given to 
+support statements   
+0 points  1-2 points  3-4 points  5 points  
+Presentation Delivery  
+Statements are well -
+organized and clearly 
+stated  Competitor (s) did not 
+appear prepared  Competitor (s) were 
+prepared, but flow 
+was not logical  Presentation flowed in 
+logical sequence  Presentation flowed in a 
+logical sequence; 
+statements were well 
+organized   
+0 points  1-6 points  7-8 points  9-10 points  
+Consistently displays 
+confidence, poised body 
+language, engaging eye 
+contact, and effective 
+voice projection.  Did not demonstrate 
+any of the listed skills  Demonstrated 1 -2 of 
+the listed skills 
+(confidence, body 
+language, eye 
+contact, or voice 
+projection)  Demonstrated 3 of the 
+listed skills 
+(confidence, body 
+language, eye contact, 
+or voice projection)  Demonstrated all skills, 
+enhancing the overall 
+presentation   
+0 points  1-6 points  7-8 points  9-10 points  
+Demonstrates the ability 
+to effectively answer 
+questions  Does not respond to 
+questions or responses 
+are completely off -
+topic.  Provides incomplete 
+or unclear answers 
+that show limited 
+understanding.  Responds accurately 
+and clearly to most 
+questions, showing 
+adequate 
+understanding.  Responds confidently 
+with clear, accurate, 
+and thoughtful answers 
+that enhance the overall 
+presentation.   
+0 points  1-6 points  7-8 points  9-10 points  
+Presentation Protocols  
+Adherence to Competitive 
+Events Guidelines  Competitor(s) Did 
+Not Follow 
+Guidelines  Execution Aligned with  Guidelines:  (All criteria must be met)  
+ Used only allowable technology devices ( sizing specs followed; 
+maximum of three) 
+ Presentation aligned with the assigned topic  
+ Maintained professional boundaries during set -up time (no interaction 
+with judges)  
+ Did not leave materials behind after the presentation  
+ Links or QR codes were displayed appropriately (not clicked or 
+scanned by judges)  
+ Audio was presented without external speakers (preliminary round)  
+ Avoided use of food or live animals   
+0 points  10 points  
+Staff Only: Penalty Points (5 points for dress code penalty and/or 5 points for late arrival penalty)   
+Presentation Total (1 10 points)   
+ 
+Name(s):   
+School:  Section:   
+Judge Signature:  Date:   
+Comments:  
+ 
+ 
+ 

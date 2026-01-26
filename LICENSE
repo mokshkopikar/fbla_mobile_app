@@ -1,0 +1,48 @@
+MIT License
+
+Copyright (c) 2026 FBLA Mobile Application Development Competition Entry
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+THIRD-PARTY LICENSES
+
+This project uses the following open-source libraries:
+
+- Flutter Framework: BSD 3-Clause License
+- flutter_bloc: MIT License
+- get_it: MIT License
+- equatable: MIT License
+- shared_preferences: BSD 3-Clause License
+- url_launcher: BSD 3-Clause License
+- share_plus: MIT License
+- intl: BSD 3-Clause License
+
+See THIRD_PARTY.md for detailed attribution and links to original licenses.
+
+---
+
+FBLA BRANDING NOTICE
+
+This application is developed for educational purposes as part of the FBLA 2025-2026 
+Mobile Application Development competition. FBLA logos, branding, and official 
+resources are property of Future Business Leaders of America (FBLA) and are used 
+herein solely for competition demonstration purposes. This application is not an 
+official FBLA product and will not be adopted or implemented by FBLA.

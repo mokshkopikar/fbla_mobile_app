@@ -1,0 +1,43 @@
+---
+description: Command execution preferences - when to execute vs when to ask user
+alwaysApply: true
+---
+
+# Command Execution Preferences
+
+## Long-Running Commands
+
+**DO NOT execute** commands that run indefinitely or start servers. Instead, **ask the user** to run them in their terminal.
+
+### Examples of Long-Running Commands:
+- `flutter run -d chrome` - Starts dev server
+- `flutter run` - Runs on device/simulator
+- `npm start` - Starts development server
+- `python manage.py runserver` - Django server
+- Any command that starts a server or keeps running
+
+### What to Do Instead:
+1. **Identify** that the command is long-running
+2. **Ask the user** to copy and paste the command in their terminal
+3. **Provide** the exact command they should run
+4. **Explain** why (e.g., "This command starts a server that runs indefinitely")
+
+## Quick Commands (OK to Execute)
+
+**DO execute** commands that complete quickly:
+- `flutter pub get` - Installs dependencies
+- `flutter test` - Runs tests
+- `flutter build web` - Builds the app
+- `flutter analyze` - Code analysis
+- `flutter devices` - Lists devices
+- `git status` - Shows git status
+- `npm install` - Installs packages
+- Any command that completes and returns
+
+## Best Practice
+
+When in doubt, if a command:
+- Starts a server → Ask user to run it
+- Keeps running indefinitely → Ask user to run it
+- Opens a browser/app → Ask user to run it
+- Completes in seconds → Execute it
