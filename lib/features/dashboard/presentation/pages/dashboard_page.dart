@@ -6,14 +6,34 @@ import '../../../resources/presentation/widgets/resource_list_tab.dart';
 import '../../../social/presentation/widgets/social_feed_tab.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  /// Creates a new [DashboardPage] instance.
+  /// 
+  /// [initialIndex] - Optional initial tab index to display (0-3).
+  ///                   Used when navigating from other screens (e.g., profile page).
+  const DashboardPage({super.key, this.initialIndex});
+
+  /// Optional initial tab index to display.
+  /// 
+  /// - 0: Events
+  /// - 1: News
+  /// - 2: Resources
+  /// - 3: Social
+  final int? initialIndex;
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  int _selectedIndex = 1; // Default to Newsfeed tab (index 1)
+  late int _selectedIndex; // Current selected tab index
+
+  @override
+  void initState() {
+    super.initState();
+    // Use initialIndex if provided (e.g., when navigating from profile page)
+    // Otherwise default to Newsfeed tab (index 1)
+    _selectedIndex = widget.initialIndex ?? 1;
+  }
 
   static const List<Widget> _widgetOptions = <Widget>[
     EventCalendarTab(),
@@ -72,11 +92,20 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           IconButton(
             icon: const Icon(Icons.account_circle),
-            onPressed: () {
-              Navigator.push(
+            onPressed: () async {
+              // Navigate to profile page and wait for result
+              // The result will be the selected tab index if user navigates via bottom nav
+              final result = await Navigator.push<int>(
                 context,
                 MaterialPageRoute(builder: (context) => const MemberProfilePage()),
               );
+              
+              // If user selected a tab from profile page, switch to that tab
+              if (result != null && result >= 0 && result < _widgetOptions.length) {
+                setState(() {
+                  _selectedIndex = result;
+                });
+              }
             },
             tooltip: 'My FBLA Profile',
           ),

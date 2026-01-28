@@ -30,7 +30,11 @@ import 'features/dashboard/presentation/pages/dashboard_page_test.dart' as dashb
 import 'features/event_calendar/presentation/widgets/event_calendar_tab_test.dart' as event_test;
 import 'features/resources/presentation/widgets/resource_list_tab_test.dart' as resource_test;
 import 'features/social/presentation/widgets/social_feed_tab_test.dart' as social_test;
+import 'features/news_feed/presentation/widgets/news_feed_tab_test.dart' as news_test;
 import 'features/member_profile/data/datasources/member_local_data_source_test.dart' as persistence_test;
+import 'features/news_feed/data/datasources/news_local_data_source_test.dart' as news_cache_test;
+import 'features/event_calendar/data/datasources/event_local_data_source_test.dart' as event_cache_test;
+import 'features/news_feed/data/repositories/news_repository_cache_test.dart' as news_repo_cache_test;
 import 'core/accessibility_test.dart' as accessibility_test;
 import 'demo_script_integration_test.dart' as integration_test;
 
@@ -38,6 +42,12 @@ void main() {
   group('FBLA COMPETITION COMPLETE SUITE', () {
     // Core & Persistence
     persistence_test.main();
+    
+    // Caching Tests (News & Events)
+    news_cache_test.main();
+    event_cache_test.main();
+    news_repo_cache_test.main();
+    
     accessibility_test.main();
 
     // Feature: Member Profile
@@ -45,6 +55,9 @@ void main() {
     
     // Feature: Dashboard & Newsfeed
     dashboard_test.main();
+    
+    // Feature: News Feed (Category filter, Clear button)
+    news_test.main();
 
     // Feature: Event Calendar
     event_test.main();

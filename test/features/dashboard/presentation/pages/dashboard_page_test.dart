@@ -58,16 +58,45 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle(const Duration(milliseconds: 800));
 
-      // 1. Find and enter text into search bar
-      final searchField = find.byType(TextField);
+      // 1. Find search field (should be the second TextField after category dropdown)
+      final searchFields = find.byType(TextField);
+      expect(searchFields, findsWidgets);
+      final searchField = searchFields.at(1); // Second TextField is the search
+      
+      // 2. Enter text into search bar
       await tester.enterText(searchField, 'Leadership');
       
       // Wait for search delay
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      // 2. Assert: Check if filtering worked (only Leadership article should show)
+      // 3. Assert: Check if filtering worked (only Leadership article should show)
       expect(find.text('FBLA National Leadership Conference 2026'), findsOneWidget);
       expect(find.text('Spring Chapter Awards Announced'), findsNothing);
+      
+      // 4. Assert: Clear button (X) appears when text is entered
+      expect(find.byIcon(Icons.clear), findsOneWidget);
+    });
+
+    testWidgets('Feature: Category Dropdown in News Feed', (WidgetTester tester) async {
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pumpAndSettle(const Duration(milliseconds: 800));
+
+      // 1. Navigate to News tab (should already be there, but ensure)
+      // News tab is index 1, which is the default
+      
+      // 2. Assert: Category dropdown exists
+      expect(find.text('Category'), findsOneWidget);
+      expect(find.text('All Categories'), findsOneWidget);
+      
+      // 3. Verify dropdown has all expected categories
+      await tester.tap(find.text('All Categories'));
+      await tester.pumpAndSettle();
+      
+      expect(find.text('All Categories'), findsWidgets);
+      expect(find.text('National Center News'), findsWidgets);
+      expect(find.text('Chapter Spotlight'), findsWidgets);
+      expect(find.text('State Spotlight'), findsWidgets);
+      expect(find.text('Alumni Spotlight'), findsWidgets);
     });
 
     testWidgets('UseCase: Tab and Profile Navigation', (WidgetTester tester) async {

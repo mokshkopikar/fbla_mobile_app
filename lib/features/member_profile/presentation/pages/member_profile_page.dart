@@ -4,11 +4,15 @@ import '../bloc/member_profile_bloc.dart';
 import '../../../../injection_container.dart';
 import '../../domain/entities/member.dart';
 import '../../domain/entities/profile_validator.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
 /// UI Page for viewing and editing the Member Profile.
 /// 
 /// [Clean Architecture - Presentation Layer]: This widget only cares about
 /// states and events. It doesn't know where the data comes from.
+/// 
+/// **Navigation**: Includes bottom navigation bar to allow users to navigate
+/// to other screens (Events, News, Resources, Social) without going back first.
 class MemberProfilePage extends StatelessWidget {
   const MemberProfilePage({super.key});
 
@@ -22,7 +26,61 @@ class MemberProfilePage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         ),
         body: const MemberProfileView(),
+        // Bottom navigation bar for easy navigation to other screens
+        // This allows users to switch between features without going back
+        bottomNavigationBar: _ProfileBottomNavigationBar(),
       ),
+    );
+  }
+}
+
+/// Bottom navigation bar for the Member Profile page.
+/// 
+/// Provides persistent navigation to all main app features, allowing users
+/// to switch between screens without having to go back to the dashboard first.
+class _ProfileBottomNavigationBar extends StatelessWidget {
+  const _ProfileBottomNavigationBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: const Color(0xFF003366), // FBLA Blue
+      unselectedItemColor: Colors.grey,
+      currentIndex: 4, // Profile is the 5th item (index 4)
+      onTap: (index) {
+        // Navigate based on selected index
+        if (index == 4) {
+          // Already on profile page, do nothing
+          return;
+        }
+        
+        // Navigate back to dashboard with the selected tab
+        // Pop the profile page and return the selected index
+        Navigator.of(context).pop(index);
+      },
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_month),
+          label: 'Events',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.newspaper),
+          label: 'News',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.folder),
+          label: 'Resources',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.share),
+          label: 'Social',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+          label: 'Profile',
+        ),
+      ],
     );
   }
 }

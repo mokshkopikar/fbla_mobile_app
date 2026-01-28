@@ -55,4 +55,24 @@ class MemberModel extends Member {
       gradeLevel: member.gradeLevel,
     );
   }
+
+  /// Converts this [MemberModel] to a [Member] entity.
+  /// 
+  /// Since [MemberModel] extends [Member], this method returns the instance
+  /// as a [Member] type to maintain layer separation. The domain layer should
+  /// only work with [Member] entities, not [MemberModel] instances.
+  /// 
+  /// Returns a [Member] instance with the same data as this model.
+  Member toEntity() {
+    // Since MemberModel extends Member, we can return this directly
+    // But we create a new Member instance to maintain abstraction
+    return Member(
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      chapter: chapter,
+      gradeLevel: gradeLevel,
+    );
+  }
 }

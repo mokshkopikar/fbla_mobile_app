@@ -8,12 +8,14 @@ import 'features/member_profile/domain/usecases/get_profile.dart';
 import 'features/member_profile/domain/usecases/update_profile.dart';
 import 'features/member_profile/presentation/bloc/member_profile_bloc.dart';
 import 'features/news_feed/data/datasources/news_remote_data_source.dart';
+import 'features/news_feed/data/datasources/news_local_data_source.dart';
 import 'features/news_feed/data/repositories/news_repository_impl.dart';
 import 'features/news_feed/domain/repositories/news_repository.dart';
 import 'features/news_feed/domain/usecases/get_latest_news.dart';
 import 'features/news_feed/domain/usecases/search_news.dart';
 import 'features/news_feed/presentation/bloc/news_bloc.dart';
 import 'features/event_calendar/data/datasources/event_data_source.dart';
+import 'features/event_calendar/data/datasources/event_local_data_source.dart';
 import 'features/event_calendar/data/repositories/event_repository_impl.dart';
 import 'features/event_calendar/domain/repositories/event_repository.dart';
 import 'features/event_calendar/presentation/bloc/event_bloc.dart';
@@ -34,106 +36,165 @@ final sl = GetIt.instance;
 /// [Dependency Injection]: We use the Service Locator pattern to manage
 /// dependencies. This makes the code highly testable by allowing us to
 /// inject mock dependencies into our classes and ensures a "Separation of Concerns".
+/// Initializes the dependency injection container for the entire application.
+/// 
+/// **Registration Order**: Dependencies are registered in reverse dependency order:
+/// 1. External dependencies (SharedPreferences, etc.)
+/// 2. Data sources (lowest level)
+/// 3. Repositories (depend on data sources)
+/// 4. Use cases (depend on repositories)
+/// 5. BLoCs (depend on use cases)
+/// 
+/// **Registration Types**:
+/// - `registerFactory`: Creates new instance each time (for BLoCs, use cases)
+/// - `registerLazySingleton`: Creates one instance, reused (for repositories, data sources)
+/// 
+/// **Dependency Resolution**: When `sl<Type>()` is called, the service locator
+/// automatically resolves all nested dependencies by calling `sl()` recursively.
 Future<void> init() async {
-  //! Features - Member Profile
+  // ============================================================================
+  // FEATURE: Member Profile
+  // ============================================================================
   
-  // BLoC
+  // BLoC - State management for member profile feature
+  // Factory: New instance created each time (stateless, can have multiple instances)
   sl.registerFactory(
     () => MemberProfileBloc(
-      getProfileUseCase: sl(),
-      updateProfileUseCase: sl(),
+      getProfileUseCase: sl(),      // Resolves GetProfile use case
+      updateProfileUseCase: sl(),   // Resolves UpdateProfile use case
     ),
   );
 
-  // UseCases
-  sl.registerFactory(() => GetProfile(sl()));
-  sl.registerFactory(() => UpdateProfile(sl()));
+  // Use Cases - Business logic operations
+  // Factory: New instance created each time (stateless)
+  sl.registerFactory(() => GetProfile(sl()));      // Resolves MemberRepository
+  sl.registerFactory(() => UpdateProfile(sl()));   // Resolves MemberRepository
 
-  // Repository
+  // Repository - Data access abstraction layer
+  // Lazy Singleton: One instance created and reused (shared state, expensive to create)
   sl.registerLazySingleton<MemberRepository>(
-    () => MemberRepositoryImpl(dataSource: sl()),
+    () => MemberRepositoryImpl(dataSource: sl()),  // Resolves MemberDataSource
   );
 
-  // Data sources
+  // Data Source - Low-level data operations (local storage)
+  // Lazy Singleton: One instance created and reused (shared SharedPreferences)
   sl.registerLazySingleton<MemberDataSource>(
-    () => MemberLocalDataSourceImpl(sharedPreferences: sl()),
+    () => MemberLocalDataSourceImpl(sharedPreferences: sl()),  // Resolves SharedPreferences
   );
 
-  //! Features - Newsfeed
+  // ============================================================================
+  // FEATURE: News Feed
+  // ============================================================================
   
-  // BLoC
+  // BLoC - State management for news feed feature
   sl.registerFactory(
     () => NewsBloc(
-      getLatestNews: sl(),
-      searchNews: sl(),
+      getLatestNews: sl(),    // Resolves GetLatestNews use case
+      searchNews: sl(),       // Resolves SearchNews use case
     ),
   );
 
-  // UseCases
-  sl.registerFactory(() => GetLatestNews(sl()));
-  sl.registerFactory(() => SearchNews(sl()));
+  // Use Cases - Business logic operations
+  sl.registerFactory(() => GetLatestNews(sl()));   // Resolves NewsRepository
+  sl.registerFactory(() => SearchNews(sl()));      // Resolves NewsRepository
 
-  // Repository
+  // Repository - Data access abstraction layer
+  // Now uses both remote and local data sources for cache-first strategy
   sl.registerLazySingleton<NewsRepository>(
-    () => NewsRepositoryImpl(remoteDataSource: sl()),
+    () => NewsRepositoryImpl(
+      remoteDataSource: sl(),  // Resolves NewsRemoteDataSource
+      localDataSource: sl(),   // Resolves NewsLocalDataSource
+    ),
   );
 
-  // Data sources
+  // Remote Data Source - Mock implementation for standalone demo
+  // Uses mock data to ensure app works offline (FBLA competition requirement)
   sl.registerLazySingleton<NewsRemoteDataSource>(
     () => MockNewsRemoteDataSource(),
   );
 
-  //! Features - Event Calendar
+  // Local Data Source - Caching implementation for offline access
+  // Stores news articles locally for fast, offline access
+  sl.registerLazySingleton<NewsLocalDataSource>(
+    () => NewsLocalDataSourceImpl(sharedPreferences: sl()),  // Resolves SharedPreferences
+  );
+
+  // ============================================================================
+  // FEATURE: Event Calendar
+  // ============================================================================
   
-  // BLoC
+  // BLoC - State management for event calendar feature
   sl.registerFactory(
-    () => EventBloc(repository: sl()),
+    () => EventBloc(repository: sl()),  // Resolves EventRepository
   );
 
-  // Repository
+  // Repository - Data access abstraction layer
+  // Now uses both remote and local data sources for cache-first strategy
   sl.registerLazySingleton<EventRepository>(
-    () => EventRepositoryImpl(dataSource: sl()),
+    () => EventRepositoryImpl(
+      remoteDataSource: sl(),  // Resolves EventDataSource
+      localDataSource: sl(),   // Resolves EventLocalDataSource
+    ),
   );
 
-  // Data sources
+  // Remote Data Source - Mock implementation for standalone demo
   sl.registerLazySingleton<EventDataSource>(
     () => MockEventDataSourceImpl(),
   );
 
-  //! Features - Resources
-
-  // BLoC
-  sl.registerFactory(() => ResourceBloc(repository: sl()));
-
-  // Repository
-  sl.registerLazySingleton<ResourceRepository>(
-    () => ResourceRepositoryImpl(remoteDataSource: sl()),
+  // Local Data Source - Caching implementation for offline access
+  // Stores events locally for fast, offline access
+  sl.registerLazySingleton<EventLocalDataSource>(
+    () => EventLocalDataSourceImpl(sharedPreferences: sl()),  // Resolves SharedPreferences
   );
 
-  // Data sources
+  // ============================================================================
+  // FEATURE: Resources
+  // ============================================================================
+
+  // BLoC - State management for resources feature
+  sl.registerFactory(() => ResourceBloc(repository: sl()));  // Resolves ResourceRepository
+
+  // Repository - Data access abstraction layer
+  sl.registerLazySingleton<ResourceRepository>(
+    () => ResourceRepositoryImpl(remoteDataSource: sl()),  // Resolves ResourceRemoteDataSource
+  );
+
+  // Data Source - Mock implementation for standalone demo
   sl.registerLazySingleton<ResourceRemoteDataSource>(
     () => MockResourceRemoteDataSource(),
   );
 
-  //! Features - Social
+  // ============================================================================
+  // FEATURE: Social Feed
+  // ============================================================================
 
-  // BLoC
-  sl.registerFactory(() => SocialBloc(repository: sl()));
+  // BLoC - State management for social feed feature
+  sl.registerFactory(() => SocialBloc(repository: sl()));  // Resolves SocialRepository
 
-  // Repository
+  // Repository - Data access abstraction layer
   sl.registerLazySingleton<SocialRepository>(
-    () => SocialRepositoryImpl(remoteDataSource: sl()),
+    () => SocialRepositoryImpl(remoteDataSource: sl()),  // Resolves SocialRemoteDataSource
   );
 
-  // Data sources
+  // Data Source - Mock implementation for standalone demo
   sl.registerLazySingleton<SocialRemoteDataSource>(
     () => MockSocialRemoteDataSource(),
   );
 
-  //! Core
-  // Place for shared external dependencies like SharedPreferences or Http Client
+  // ============================================================================
+  // CORE DEPENDENCIES
+  // ============================================================================
+  // Shared dependencies used across multiple features
   
-  //! External
+  // ============================================================================
+  // EXTERNAL DEPENDENCIES
+  // ============================================================================
+  // Third-party services and platform APIs
+  
+  // SharedPreferences - Platform-agnostic key-value storage
+  // Used for local data persistence (member profile, app settings, etc.)
+  // Lazy Singleton: One instance shared across entire app
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
 }

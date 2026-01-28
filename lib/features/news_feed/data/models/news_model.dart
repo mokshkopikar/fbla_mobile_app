@@ -8,6 +8,7 @@ class NewsModel extends NewsEntry {
     required super.summary,
     super.imageUrl,
     required super.link,
+    required super.category,
   });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
@@ -18,6 +19,7 @@ class NewsModel extends NewsEntry {
       summary: json['summary'] as String,
       imageUrl: json['imageUrl'] as String?,
       link: json['link'] as String,
+      category: json['category'] as String? ?? 'National Center News',
     );
   }
 
@@ -29,6 +31,7 @@ class NewsModel extends NewsEntry {
       'summary': summary,
       'imageUrl': imageUrl,
       'link': link,
+      'category': category,
     };
   }
 }

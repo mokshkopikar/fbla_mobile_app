@@ -31,17 +31,24 @@ class FBLAApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // MultiBlocProvider makes BLoCs available to all child widgets
+    // Each BLoC is retrieved from the dependency injection container
+    // and initialized with an initial event to load data on app start
     return MultiBlocProvider(
       providers: [
+        // News Feed BLoC - provides news articles and search functionality
         BlocProvider(
           create: (_) => di.sl<NewsBloc>()..add(FetchLatestNewsEvent()),
         ),
+        // Event Calendar BLoC - provides FBLA events and filtering
         BlocProvider(
           create: (_) => di.sl<EventBloc>()..add(FetchEventsEvent()),
         ),
+        // Resources BLoC - provides FBLA resources and search
         BlocProvider(
           create: (_) => di.sl<ResourceBloc>()..add(FetchResourcesEvent()),
         ),
+        // Social Feed BLoC - provides social media posts
         BlocProvider(
           create: (_) => di.sl<SocialBloc>()..add(FetchSocialFeedEvent()),
         ),
